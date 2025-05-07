@@ -1,4 +1,4 @@
-const express = require("express"); //  importo Express, il framework per creare server Node.js.
+const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const loginRoute = require("./routes/login");
@@ -25,23 +25,28 @@ function makeHandlerAwareOfAsyncErrors(handler) {
 }
 
 app.post("/api/login", makeHandlerAwareOfAsyncErrors(loginRoute.login));
-app.get("/api/user", authenticateToken, makeHandlerAwareOfAsyncErrors(routes.user.getAll));
 
 for (const [routeName, routeController] of Object.entries(routes)) {
+  const path = `/api/${routeName}`;
+
   if (routeController.getAll) {
-    app.get(`/api/${routeName}`, makeHandlerAwareOfAsyncErrors(routeController.getAll));
+    if (routeName === "user") {
+      app.get(path, authenticateToken, makeHandlerAwareOfAsyncErrors(routeController.getAll));
+    } else {
+      app.get(path, makeHandlerAwareOfAsyncErrors(routeController.getAll));
+    }
   }
   if (routeController.getById) {
-    app.get(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.getById));
+    app.get(`${path}/:id`, makeHandlerAwareOfAsyncErrors(routeController.getById));
   }
   if (routeController.create) {
-    app.post(`/api/${routeName}`, makeHandlerAwareOfAsyncErrors(routeController.create));
+    app.post(path, makeHandlerAwareOfAsyncErrors(routeController.create));
   }
   if (routeController.update) {
-    app.put(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.update));
+    app.put(`${path}/:id`, makeHandlerAwareOfAsyncErrors(routeController.update));
   }
   if (routeController.remove) {
-    app.delete(`/api/${routeName}/:id`, makeHandlerAwareOfAsyncErrors(routeController.remove));
+    app.delete(`${path}/:id`, makeHandlerAwareOfAsyncErrors(routeController.remove));
   }
 }
 
