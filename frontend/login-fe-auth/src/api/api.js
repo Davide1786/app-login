@@ -2,8 +2,8 @@ import axios from "axios";
 
 const URL = `http://localhost:3001/api`;
 
-// aggiungi user
-export const addedSingleUser = async (payload) => {
+// crea user
+export const createSingleUser = async (payload) => {
   try {
     const response = await axios.post(`${URL}/user`, {
       name: payload.name,
@@ -14,10 +14,11 @@ export const addedSingleUser = async (payload) => {
     return response.data;
   } catch (error) {
     console.error("Error updating data:", error);
-    throw error; // Lancia l'errore per gestirlo nel thunk
+    throw error;
   }
 };
 
+// confronta alla login mail e password
 export const matchLogin = async (payload) => {
   console.log(payload, "sonoPay");
 
@@ -29,10 +30,11 @@ export const matchLogin = async (payload) => {
     return response.data;
   } catch (error) {
     console.error("Error updating data:", error);
-    throw error; // Lancia l'errore per gestirlo nel thunk
+    throw error;
   }
 };
 
+// recupera il profilo
 export const getUserProfile = async () => {
   const token = localStorage.getItem("token");
 

@@ -66,18 +66,14 @@ const App = () => {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
-            {/* <Route index element={<Navigate replace to={"dashboard"} />} /> */}
-
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="/" element={<Home />} />
-            {/* <Route path="login" element={<Login />} /> */}
-            {/* <Route path="register" element={<RegisterUser />} /> */}
-          </Route>
-
           <Route path="login" element={<Login />} />
           <Route path="register" element={<RegisterUser />} />
-          {/* <Route path="profile" element={<Profile />} /> */}
+
+          <Route element={<AppLayout />}>
+            {/* <Route index element={<Navigate replace to={"dashboard"} />} /> */}
+            <Route path="/" element={<Home />} />
+            <Route path="dashboard" element={<Dashboard />} />
+          </Route>
 
           <Route
             path="profile"

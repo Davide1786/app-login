@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { addedSingleUser } from "../api/api";
+import { createSingleUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 const RegisterUser = () => {
@@ -19,7 +19,7 @@ const RegisterUser = () => {
   } = useForm();
 
   const { mutate } = useMutation({
-    mutationFn: addedSingleUser,
+    mutationFn: createSingleUser,
     onSuccess: () => {
       toast.success("Utente creato con successo");
       queryClient.invalidateQueries({

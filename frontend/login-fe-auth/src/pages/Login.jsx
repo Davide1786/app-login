@@ -29,7 +29,7 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       toast.success("Ciao " + user.name);
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       reset();
       navigate(`/profile`);
     },

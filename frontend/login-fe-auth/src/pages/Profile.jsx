@@ -22,6 +22,8 @@ const Profile = () => {
     navigate("/"); // se usi react-router
   };
 
+  console.log(user.id, "ciao");
+
   return (
     <div>
       <h2>Benvenuto, {user.name}</h2>
