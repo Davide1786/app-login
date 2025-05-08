@@ -1,11 +1,9 @@
-// import { useQuery } from "@tanstack/react-query";
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { matchLogin } from "../api/api";
 import { useForm } from "react-hook-form";
-// import { matchLogin } from "../api/api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,12 +21,7 @@ const Login = () => {
   const { mutate } = useMutation({
     mutationFn: matchLogin,
     onSuccess: (data) => {
-      // const { token, user } = data;
       const { user } = data;
-
-      // localStorage.setItem("token", token);
-      // localStorage.setItem("user", JSON.stringify(user));
-
       toast.success("Ciao " + user.name);
       queryClient.invalidateQueries({ queryKey: ["user"] });
       reset();

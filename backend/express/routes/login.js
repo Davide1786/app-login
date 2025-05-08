@@ -1,50 +1,3 @@
-// const { models } = require("../../sequelize");
-// const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
-
-// const SECRET_KEY = process.env.SECRET_KEY;
-
-// async function login(req, res) {
-//   const { email, password } = req.body;
-
-//   try {
-//     const user = await models.user.findOne({ where: { email } });
-
-//     if (!user) {
-//       return res.status(404).json({ message: "Utente non trovato" });
-//     }
-
-//     const passwordMatch = await bcrypt.compare(password, user.password);
-
-//     if (!passwordMatch) {
-//       return res.status(401).json({ message: "Password errata" });
-//     }
-
-//     const token = jwt.sign(
-//       {
-//         id: user.id,
-//         email: user.email,
-//       },
-//       SECRET_KEY,
-//       { expiresIn: "600s" }
-//     );
-
-//     const { password: _, ...userData } = user.toJSON();
-
-//     res.status(200).json({
-//       message: "Login riuscito",
-//       token,
-//       user: userData,
-//     });
-//   } catch (error) {
-//     res.status(500).json({ message: "Errore nella login", error: error.message });
-//   }
-// }
-
-// module.exports = { login };
-
-// ===============
-
 const { models } = require("../../sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -73,8 +26,8 @@ async function login(req, res) {
         email: user.email,
       },
       SECRET_KEY,
-      // { expiresIn: "1d" } // oppure quello che preferisci
-      { expiresIn: "30s" } // oppure quello che preferisci
+      // { expiresIn: "1d" }
+      { expiresIn: "30s" }
     );
 
     // Imposta cookie HttpOnly
@@ -84,7 +37,7 @@ async function login(req, res) {
       // secure: process.env.NODE_ENV === "production", // attivo solo in prod
       secure: false, // per test in localhost
       // maxAge: 24 * 60 * 60 * 1000, // 1 giorno
-      maxAge: 30 * 1000, // 🔁 durata cookie: 60 secondi (in millisecondi)
+      maxAge: 30 * 1000, // durata cookie: 60 secondi (in millisecondi)
     });
 
     console.log("Cookie inviato:", req.cookies);

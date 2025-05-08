@@ -30,7 +30,7 @@ export const matchLogin = async (payload) => {
         password: payload.password,
       },
       {
-        withCredentials: true, // 🔥 AGGIUNGI QUESTO!
+        withCredentials: true,
       }
     );
     return response.data;
@@ -40,24 +40,6 @@ export const matchLogin = async (payload) => {
   }
 };
 
-// recupera il profilo
-// export const getUserProfile = async () => {
-//   const token = localStorage.getItem("token");
-
-//   try {
-//     const response = await axios.get(`${URL}/profile`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("Errore nel recupero del profilo:", error);
-//     throw error;
-//   }
-// };
-
 export const getUserProfile = async () => {
   try {
     const response = await axios.get(`${URL}/profile`, {
@@ -66,10 +48,6 @@ export const getUserProfile = async () => {
 
     return response.data;
   } catch (error) {
-    // if (error.response && error.response.status === 401) {
-    //   // Token mancante o scaduto, reindirizza alla login
-    //   window.location.href = "/login"; // oppure usa navigate('/login') se usi React Router
-    // }
     console.error("Errore nel recupero del profilo:", error);
     throw error;
   }

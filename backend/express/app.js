@@ -13,13 +13,10 @@ const routes = {
 
 const app = express();
 
-// app.use(cors()); // localstorage
-
-// uso per cookie
 app.use(
   cors({
-    origin: "http://localhost:5173", // o il tuo dominio
-    credentials: true, // 🔥 IMPORTANTE: abilita i cookie
+    origin: "http://localhost:5173", // o il dominio
+    credentials: true, // IMPORTANTE: abilita i cookie
   })
 );
 
@@ -41,6 +38,7 @@ function makeHandlerAwareOfAsyncErrors(handler) {
 app.post("/api/login", makeHandlerAwareOfAsyncErrors(loginRoute.login));
 app.get("/api/profile", authenticateToken, makeHandlerAwareOfAsyncErrors(profileRoute.getProfile));
 app.post("/api/logout", logoutRoute.logout);
+
 for (const [routeName, routeController] of Object.entries(routes)) {
   const path = `/api/${routeName}`;
 
