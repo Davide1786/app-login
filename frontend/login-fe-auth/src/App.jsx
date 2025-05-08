@@ -32,13 +32,13 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       {/* istallato devTools  */}
       <ReactQueryDevtools initialIsOpen={false} />
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<RegisterUser />} />
 
           <Route element={<AppLayout />}>
-            {/* <Route index element={<Navigate replace to={"dashboard"} />} /> */}
+            <Route index element={<Navigate replace to={"dashboard"} />} />
             <Route path="/" element={<Home />} />
             <Route path="dashboard" element={<Dashboard />} />
           </Route>
@@ -51,6 +51,30 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter> */}
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<RegisterUser />} />
+
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+
+          {/* ROTTE PROTETTE */}
+          <Route element={<ProtectedRoute />}>
+            {/* in qst modo devo usare Link che crea percorso nella URL */}
+            {/* <Route path="profile" element={<Profile />}>
+              <Route path="dashboard" element={<Dashboard />} />
+            </Route> */}
+
+            {/* in qst modo devo usare navigate che indirizza nel componente */}
+            <Route path="profile" element={<Profile />} />
+            <Route path="dashboard" element={<Dashboard />} />
+          </Route>
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

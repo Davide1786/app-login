@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { getUserProfile, logoutUser } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Profile = () => {
@@ -44,12 +44,24 @@ const Profile = () => {
     logoutMutation.mutate();
   };
 
+  const handleClickNext = () => {
+    navigate("/dashboard");
+  };
   return (
     <div>
       <h2>Benvenuto, {user.name}</h2>
       <p>Email: {user.email}</p>
 
       <button onClick={handleLogout}>Esci</button>
+
+      <div>
+        <h1>Visita la tua dash</h1>
+        {/* <Link to="dashboard">Vai alla Dashboard</Link> */}
+        <button onClick={handleClickNext}>Vai dash</button>
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

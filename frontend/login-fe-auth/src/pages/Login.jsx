@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { matchLogin } from "../api/api";
@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
 
   const {
     register,
@@ -27,12 +28,20 @@ const Login = () => {
       reset();
       navigate(`/profile`);
     },
+    onError: (err) => {
+      // Imposta il messaggio di errore generico
+      setLoginError("Email o password non corrette");
+      console.error("Errore di login:", err);
+      // Posso mostrare un toast di errore più generico se voglio
+      // toast.error("Email o password non corrette");
+    },
   });
 
   function onSubmit(data) {
+    setLoginError("");
     mutate({ ...data });
-    console.log(data, "as");
   }
+
   return (
     <div>
       Login
@@ -42,6 +51,7 @@ const Login = () => {
           type="text"
           {...register("email", {
             required: "Il campo è obbligatorio",
+            message: "Email non valida",
           })}
         />
         <label htmlFor="">Password</label>
@@ -49,9 +59,10 @@ const Login = () => {
           type="password"
           {...register("password", {
             required: "Il campo è obbligatorio",
+            message: "pas non valida",
           })}
         />
-
+        {loginError && <p style={{ color: "red" }}>{loginError}</p>} {/* Mostra l'errore di login */}
         <Link to="/">Torna alla Home</Link>
         <button>Entra</button>
       </form>
