@@ -23,10 +23,11 @@ const Login = () => {
   const { mutate } = useMutation({
     mutationFn: matchLogin,
     onSuccess: (data) => {
-      const { token, user } = data;
+      // const { token, user } = data;
+      const { user } = data;
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      // localStorage.setItem("token", token);
+      // localStorage.setItem("user", JSON.stringify(user));
 
       toast.success("Ciao " + user.name);
       queryClient.invalidateQueries({ queryKey: ["user"] });

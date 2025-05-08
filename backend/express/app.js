@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const loginRoute = require("./routes/login");
 const authenticateToken = require("../middleware/auth");
 const profileRoute = require("./routes/profile");
+const logoutRoute = require("./routes/logout");
+const cookieParser = require("cookie-parser");
 
 const routes = {
   user: require("./routes/user"),
@@ -11,10 +13,20 @@ const routes = {
 
 const app = express();
 
-app.use(cors());
+// app.use(cors()); // localstorage
+
+// uso per cookie
+app.use(
+  cors({
+    origin: "http://localhost:5173", // o il tuo dominio
+    credentials: true, // 🔥 IMPORTANTE: abilita i cookie
+  })
+);
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 function makeHandlerAwareOfAsyncErrors(handler) {
   return async function (req, res, next) {
@@ -28,7 +40,7 @@ function makeHandlerAwareOfAsyncErrors(handler) {
 
 app.post("/api/login", makeHandlerAwareOfAsyncErrors(loginRoute.login));
 app.get("/api/profile", authenticateToken, makeHandlerAwareOfAsyncErrors(profileRoute.getProfile));
-
+app.post("/api/logout", logoutRoute.logout);
 for (const [routeName, routeController] of Object.entries(routes)) {
   const path = `/api/${routeName}`;
 
