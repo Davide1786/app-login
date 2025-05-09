@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Button from "../UI/Button";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -9,10 +10,8 @@ const Dashboard = () => {
   };
   return (
     <div>
-      Dashboard
-      {/* <Link to="profile">torna al profilo</Link> */}
-      {/* <Link to="-1">Vai al profilo</Link> */}
-      <button onClick={handleClickPrev}>Torna indietro</button>
+      <h1>Sono la pagina della Dashboard </h1>
+      <Button onClick={handleClickPrev}>Torna indietro</Button>
     </div>
   );
 };

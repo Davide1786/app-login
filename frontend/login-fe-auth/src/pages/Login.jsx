@@ -1,11 +1,28 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { matchLogin } from "../api/api";
 import { useForm } from "react-hook-form";
-
+import Button from "../UI/Button";
+import StyledLink from "../UI/StyledLink";
+import styled from "styled-components";
+import Form from "../UI/StyledForm";
+import StyledInputLabel from "../UI/StyledInputLabel";
+import Input from "../UI/Input";
 const Login = () => {
+  const StyledLoginContainer = styled.div`
+    height: 100lvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100lvw;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  `;
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
 
@@ -43,30 +60,31 @@ const Login = () => {
   }
 
   return (
-    <div>
-      Login
-      <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="">Email</label>
-        <input
-          type="text"
-          {...register("email", {
-            required: "Il campo è obbligatorio",
-            message: "Email non valida",
-          })}
-        />
-        <label htmlFor="">Password</label>
-        <input
-          type="password"
-          {...register("password", {
-            required: "Il campo è obbligatorio",
-            message: "pas non valida",
-          })}
-        />
+    <StyledLoginContainer>
+      <StyledLink to="/">Torna alla Home</StyledLink>
+      <Form action="" onSubmit={handleSubmit(onSubmit)}>
+        <StyledInputLabel label={"Email"}>
+          <Input
+            type="text"
+            {...register("email", {
+              required: "Il campo è obbligatorio",
+              message: "Email non valida",
+            })}
+          />
+        </StyledInputLabel>
+        <StyledInputLabel label={"Password"}>
+          <Input
+            type="password"
+            {...register("password", {
+              required: "Il campo è obbligatorio",
+              message: "pas non valida",
+            })}
+          />
+        </StyledInputLabel>
         {loginError && <p style={{ color: "red" }}>{loginError}</p>} {/* Mostra l'errore di login */}
-        <Link to="/">Torna alla Home</Link>
-        <button>Entra</button>
-      </form>
-    </div>
+        <Button>Entra</Button>
+      </Form>
+    </StyledLoginContainer>
   );
 };
 

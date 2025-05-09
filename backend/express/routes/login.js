@@ -26,8 +26,8 @@ async function login(req, res) {
         email: user.email,
       },
       SECRET_KEY,
-      // { expiresIn: "1d" }
-      { expiresIn: "30s" }
+      { expiresIn: "1d" }
+      // { expiresIn: "30s" }
     );
 
     // Imposta cookie HttpOnly
@@ -36,8 +36,8 @@ async function login(req, res) {
       sameSite: "lax", // oppure "none" se hai dominio diverso e HTTPS
       // secure: process.env.NODE_ENV === "production", // attivo solo in prod
       secure: false, // per test in localhost
-      // maxAge: 24 * 60 * 60 * 1000, // 1 giorno
-      maxAge: 30 * 1000, // durata cookie: 60 secondi (in millisecondi)
+      maxAge: 24 * 60 * 60 * 1000, // 1 giorno
+      // maxAge: 30 * 1000, // durata cookie: 60 secondi (in millisecondi)
     });
 
     console.log("Cookie inviato:", req.cookies);

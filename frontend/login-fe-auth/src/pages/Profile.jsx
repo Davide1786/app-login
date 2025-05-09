@@ -1,8 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { getUserProfile, logoutUser } from "../api/api";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Button from "../UI/Button";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -52,12 +53,11 @@ const Profile = () => {
       <h2>Benvenuto, {user.name}</h2>
       <p>Email: {user.email}</p>
 
-      <button onClick={handleLogout}>Esci</button>
+      <Button onClick={handleLogout}>Esci</Button>
 
       <div>
         <h1>Visita la tua dash</h1>
-        {/* <Link to="dashboard">Vai alla Dashboard</Link> */}
-        <button onClick={handleClickNext}>Vai dash</button>
+        <Button onClick={handleClickNext}>Vai dash</Button>
         <main>
           <Outlet />
         </main>
