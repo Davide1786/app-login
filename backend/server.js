@@ -24,6 +24,7 @@ async function init() {
     attivandolo verrà buttato giu tutto il DB e ricostruito
     FARE ATTENZIONE A COME LO USO
     */
+
     // sequelize
     //   .sync({ force: true })
     //   .then(() => {

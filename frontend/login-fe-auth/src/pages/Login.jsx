@@ -10,19 +10,19 @@ import styled from "styled-components";
 import Form from "../UI/StyledForm";
 import StyledInputLabel from "../UI/StyledInputLabel";
 import Input from "../UI/Input";
+const StyledLoginContainer = styled.div`
+  height: 100lvh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100lvw;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 const Login = () => {
-  const StyledLoginContainer = styled.div`
-    height: 100lvh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100lvw;
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  `;
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
 

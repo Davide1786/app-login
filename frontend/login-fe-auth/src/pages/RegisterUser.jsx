@@ -11,19 +11,19 @@ import Input from "../UI/Input";
 import styled from "styled-components";
 import StyledLink from "../UI/StyledLink";
 
+const StyledRegisterContainer = styled.div`
+  height: 100lvh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100lvw;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 const RegisterUser = () => {
-  const StyledRegisterContainer = styled.div`
-    height: 100lvh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100lvw;
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  `;
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -56,10 +56,10 @@ const RegisterUser = () => {
     <StyledRegisterContainer>
       <StyledLink to="/">Torna alla Home</StyledLink>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <StyledInputLabel label={"Nome"} errors={errors?.nome?.message}>
+        <StyledInputLabel label={"Nome"} errors={errors?.name?.message}>
           <Input
             type="text"
-            {...register("nome", {
+            {...register("name", {
               required: "Il campo è obbligatorio",
               minLength: {
                 value: 2,
@@ -70,10 +70,10 @@ const RegisterUser = () => {
           />
         </StyledInputLabel>
 
-        <StyledInputLabel label={"Cognome"} errors={errors?.cognome?.message}>
+        <StyledInputLabel label={"Cognome"} errors={errors?.surname?.message}>
           <Input
             type="text"
-            {...register("cognome", {
+            {...register("surname", {
               required: "Il campo è obbligatorio",
               minLength: {
                 value: 2,
